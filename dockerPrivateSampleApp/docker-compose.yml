@@ -1,0 +1,20 @@
+version: "3.5"
+
+networks:
+    private-network:
+        name: docker-private-apps-network
+        external: true
+
+services:
+    docker-private-sample-app:
+        image: docker-private-sample-app:latest
+        deploy:
+            replicas: 3
+            resources:
+                limits:
+                    cpus: "0.1"
+                    memory: 32M
+            restart_policy:
+                condition: on-failure
+        networks:
+            - private-network
