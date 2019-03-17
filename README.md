@@ -63,7 +63,7 @@ As mentioned above web server expects assets for `www.docker-public-sample-app.c
 ```
 there is a sample picture there `bubmblebee.jpg` which you may view hitting
 ```
-www.docker-public-sample-app.com/assets/bumblebee.com
+www.docker-public-sample-app.com/assets/bumblebee.jpg
 ```
 If you browse docker-public-sample-app you may find in
 ```
