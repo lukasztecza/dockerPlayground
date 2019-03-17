@@ -16,7 +16,5 @@ services:
                     memory: 32M
             restart_policy:
                 condition: on-failure
-        ports:
-            - "80:80"
         networks:
             - private-network
