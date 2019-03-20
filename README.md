@@ -77,3 +77,8 @@ private web server expects application name to be passed that way, note that aft
 ```
 docker-private-web-server/{docker_serivce_where_app_points_to}/{path_that_will_be_followed_to_the_docker_service_where_app_points_to}
 ```
+Once you are done run
+```
+bash 4_destruct.sh
+docker swarm leave --force
+```
