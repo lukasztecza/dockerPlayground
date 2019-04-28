@@ -7,5 +7,7 @@ fi
 
 if ! docker network ls | grep "docker-public-apps-network"; then
     docker network create -d overlay docker-public-apps-network
+fi
+if ! docker network ls | grep "docker-private-apps-network"; then
     docker network create -d overlay docker-private-apps-network
 fi
