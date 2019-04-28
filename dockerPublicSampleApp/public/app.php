@@ -7,7 +7,7 @@ echo $_SERVER['HOSTNAME'];
 echo '<br />';
 echo 'Grabbing private app data';
 echo '<br />';
-$uri = 'docker-private-web-server/docker-private-sample-app';
+$uri = 'docker-private-web-server/docker-private-sample-app?some_query_param=1';
 #This is how you would pass route and extra params to docker-private-sample-app
 #$uri = 'docker-private-web-server/docker-private-sample-app/someroute?some_query_param=1';
 $options = [
