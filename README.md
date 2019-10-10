@@ -45,9 +45,21 @@ Update your `/etc/hosts` adding following line
 127.0.0.1 www.docker-public-sample-app.com
 127.0.0.1 www.docker-private-sample-app.com (this line is not needed as this app is in private network but you may want to see it is not accessible)
 ```
-Now you should be able to access public app at the following url
+Public web server will listen on 443 port for https requests and mounts in `docker-compose.yml` file
 ```
-www.docker-public-sample-app.com
+./domains_certs:/etc/ssl/domains_certs
+```
+This means you need key and crt files for web server
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt
+```
+Now you should be able to access public app at the following url (if you use https you will get warning - go to advanced and add exception)
+```
+http://www.docker-public-sample-app.com
+```
+If you are using curl for https add `--insecure` option to ignore self signed certificate warning
+```
+curl --insecure 'https://www.docker-public-sample-app.com/'
 ```
 Note that private app is not accessible over public network
 ```
