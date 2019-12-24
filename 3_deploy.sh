@@ -4,3 +4,4 @@ docker stack deploy -c "$CURRENT_DIR/dockerPublicWebServer/docker-compose.yml" d
 docker stack deploy -c "$CURRENT_DIR/dockerPrivateWebServer/docker-compose.yml" docker-private-web-server
 docker stack deploy -c "$CURRENT_DIR/dockerPublicSampleApp/docker-compose.yml" docker-public-sample-app
 docker stack deploy -c "$CURRENT_DIR/dockerPrivateSampleApp/docker-compose.yml" docker-private-sample-app
+docker stack deploy -c "$CURRENT_DIR/dockerPrivateMysql/docker-compose.yml" docker-private-mysql

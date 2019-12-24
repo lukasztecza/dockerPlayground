@@ -1,7 +1,7 @@
 # dockerPlayground
 Sample images for docker that contain public web server, private web server, public app and private app
 
-### Usage
+### basic usage
 Clone this repo
 ```
 git clone https://github.com/lukasztecza/dockerPlayground.git
@@ -94,3 +94,9 @@ Once you are done run
 bash 4_destruct.sh
 docker swarm leave --force
 ```
+
+### additional usage
+Beside public/private web servers and public/private sample apps there are several other services that can be used
+
+#### docker-private-mysql
+Mysql server that runs on docker private network (however you may want to uncomment adminer in docker-compose in dev env)

@@ -1,0 +1,2 @@
+dockerPrivateMysql/databasedir/*
+!dockerPrivateMysql/databasedir/.gitkeep
