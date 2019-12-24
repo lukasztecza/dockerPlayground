@@ -99,4 +99,27 @@ docker swarm leave --force
 Beside public/private web servers and public/private sample apps there are several other services that can be used
 
 #### docker-private-mysql
-Mysql server that runs on docker private network (however you may want to uncomment adminer in docker-compose in dev env)
+Mysql server that runs on docker private network and needs to be accessed within container (however you may want to uncomment adminer in docker-compose for dev env)
+TODO create users with permissions read write and sample values
+
+TODO following containers
+####
+Redis
+
+####
+Memcached
+
+####
+Sample app that will grab values from db (use cache for a read - short to test) and store values to db
+
+####
+Rabbit
+
+####
+Sample consumer for rabbit that will call private app to store something
+
+####
+Sample producer for rabbit that will raise something whenever when called
+
+####
+Elk stack that will log everything apps and conusumers (beats, logstahs, elasticsearch, kibana - publiv but auth and ip whitelist)

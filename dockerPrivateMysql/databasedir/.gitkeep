@@ -1,1 +1,1 @@
-#dir for mysql db
+#dir for mysql db it needs to be created before running stack deploy
