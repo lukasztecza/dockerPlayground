@@ -24,7 +24,7 @@ It is possible that your local environment has multiple addresses on interface t
 ifconfig
 bash 2_init.sh 111.111.111.111 (address which you want to use from ifconfig)
 ```
-Deploy both web servers (public and private) and apps (public and private app amont others)
+Deploy both web servers (public and private) and apps (public and private app among others)
 ```
 bash 3_deploy.sh
 ```
