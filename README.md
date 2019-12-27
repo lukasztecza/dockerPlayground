@@ -1,7 +1,7 @@
 # dockerPlayground
-Sample images for docker that contain public web server, private web server, public app and private app
+Sample images for docker that contain public web server, private web server, public app and private app, mysql db and cache app
 
-### Usage
+### basic usage
 Clone this repo
 ```
 git clone https://github.com/lukasztecza/dockerPlayground.git
@@ -24,7 +24,7 @@ It is possible that your local environment has multiple addresses on interface t
 ifconfig
 bash 2_init.sh 111.111.111.111 (address which you want to use from ifconfig)
 ```
-Deploy both web servers (public and private) and both apps (public and private)
+Deploy both web servers (public and private) and apps (public and private app among others)
 ```
 bash 3_deploy.sh
 ```
@@ -94,3 +94,34 @@ Once you are done run
 bash 4_destruct.sh
 docker swarm leave --force
 ```
+
+### additional usage
+Beside public/private web servers and public/private sample apps there are several other services that can be used
+
+#### docker-private-mysql
+Mysql server that runs on docker private network (on dev you may want to use adminer which is added to docker-compose) and has mounted databasedir and dumps directories
+
+#### docker-public-db-and-cache-app
+App has db folder in which you can find sql that should be run in docker-private-mysql container so you may want to copy it into dumps directory of mysql container and run it
+
+TODO following containers
+####
+Redis
+
+####
+Memcached
+
+####
+Sample app that will grab values from db (use cache for a read - short to test) and store values to db (db part done)
+
+####
+Rabbit
+
+####
+Sample consumer for rabbit that will call private app to store something
+
+####
+Sample producer for rabbit that will raise something whenever when called
+
+####
+Elk stack that will log everything apps and conusumers (beats, logstahs, elasticsearch, kibana - publiv but auth and ip whitelist)

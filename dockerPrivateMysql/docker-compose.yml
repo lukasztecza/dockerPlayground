@@ -1,0 +1,36 @@
+version: "3.5"
+
+networks:
+    private-network:
+        name: docker-private-apps-network
+        external: true
+
+services:
+    docker-private-mysql:
+        image: docker-private-mysql:latest
+        deploy:
+            replicas: 1
+            resources:
+                limits:
+                    cpus: "0.4"
+                    memory: 256M
+            restart_policy:
+                condition: any
+            placement:
+                constraints: [node.role == manager]
+        volumes:
+            - "./databasedir:/var/lib/mysql"
+            - "./dumps:/dumps"
+        networks:
+            - private-network
+        environment:
+            - MYSQL_ROOT_PASSWORD=mypass
+        command: --default-authentication-plugin=mysql_native_password
+
+#graphical ui for mysql
+    adminer:
+        image: adminer
+        networks:
+            - private-network
+        ports:
+            - 8082:8080
