@@ -22,3 +22,17 @@ services:
         networks:
             - public-network
             - private-network
+
+#graphical ui for docker containers visualizer
+    visualizer:
+        image: dockersamples/visualizer:stable
+        ports:
+            - "8081:8080"
+        volumes:
+            - "/var/run/docker.sock:/var/run/docker.sock"
+        deploy:
+            placement:
+                constraints: [node.role == manager]
+        networks:
+            - public-network
+            - private-network

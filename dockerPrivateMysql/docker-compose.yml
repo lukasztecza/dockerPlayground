@@ -16,6 +16,8 @@ services:
                     memory: 256M
             restart_policy:
                 condition: any
+            placement:
+                constraints: [node.role == manager]
         volumes:
             - "./databasedir:/var/lib/mysql"
             - "./dumps:/dumps"
@@ -26,9 +28,9 @@ services:
         command: --default-authentication-plugin=mysql_native_password
 
 #graphical ui for mysql
-#    adminer:
-#        image: adminer
-#        networks:
-#            - private-network
-#        ports:
-#            - 8080:8080
+    adminer:
+        image: adminer
+        networks:
+            - private-network
+        ports:
+            - 8082:8080

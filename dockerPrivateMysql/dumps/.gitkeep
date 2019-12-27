@@ -1,0 +1,1 @@
+#dir for mysql db dump files where sql from other apps should be put to easily run from within mysql container
