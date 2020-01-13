@@ -6,3 +6,4 @@ docker stack deploy -c "$CURRENT_DIR/dockerPublicSampleApp/docker-compose.yml" d
 docker stack deploy -c "$CURRENT_DIR/dockerPrivateSampleApp/docker-compose.yml" docker-private-sample-app
 docker stack deploy -c "$CURRENT_DIR/dockerPrivateMysql/docker-compose.yml" docker-private-mysql
 docker stack deploy -c "$CURRENT_DIR/dockerPublicDbAndCacheApp/docker-compose.yml" docker-public-db-and-cache-app
+docker stack deploy -c "$CURRENT_DIR/dockerPrivateRedis/docker-compose.yml" docker-private-redis

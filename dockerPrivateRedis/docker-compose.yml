@@ -1,0 +1,30 @@
+version: "3.5"
+
+networks:
+    private-network:
+        name: docker-private-apps-network
+        external: true
+
+services:
+    docker-private-redis:
+        image: docker-private-redis:latest
+        deploy:
+            replicas: 1
+            resources:
+                limits:
+                    cpus: "0.3"
+                    memory: 128M
+            restart_policy:
+                condition: on-failure
+            placement:
+                constraints: [node.role == manager]
+        networks:
+            - private-network
+        ports:
+            - "6379:6379"
+
+# note that following (listen on all interfaces not only binded, allow connections from all, set storage dir, set password) has been set extra in redis.conf file
+# # bind
+# protected-mode no
+# dir /data
+# requirepass mypass

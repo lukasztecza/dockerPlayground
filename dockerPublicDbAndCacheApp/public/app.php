@@ -1,17 +1,16 @@
 <?php
-echo 'Hello world this is docker public db and cache app!';
-$engine = getenv('DB_APP_ENGINE');
-$host = getenv('DB_APP_HOST');
-$port = getenv('DB_APP_PORT');
-$database = getenv('DB_APP_DATABASE');
-$user = getenv('DB_APP_USER');
-$password = getenv('DB_APP_PASSWORD');
+$db_engine = getenv('DB_APP_ENGINE');
+$db_host = getenv('DB_APP_HOST');
+$db_port = getenv('DB_APP_PORT');
+$db_database = getenv('DB_APP_DATABASE');
+$db_user = getenv('DB_APP_USER');
+$db_password = getenv('DB_APP_PASSWORD');
 
 try {
     $connection = new \PDO(
-        $engine . ':host=' . $host . ';port=' . $port . ';dbname=' . $database . ';charset=utf8',
-        $user,
-        $password
+        $db_engine . ':host=' . $db_host . ';port=' . $db_port . ';dbname=' . $db_database . ';charset=utf8',
+        $db_user,
+        $db_password
     );
     $connection->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
     $connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -19,6 +18,21 @@ try {
     error_log($e->getMessage());
     throw new \Exception('Could not create pdo connection');
 }
+
+$redis_host = getenv('REDIS_APP_HOST');
+$redis_port = getenv('REDIS_APP_PORT');
+$redis_password = getenv('REDIS_APP_PASSWORD');
+$redis_items_cache_key = 'cached_items';
+
+try {
+    $redis = new Redis();
+    $redis->connect($redis_host, $redis_port);
+    $redis->auth($redis_password);
+} catch (\Throwable $e) {
+    error_log($e->getMessage());
+    throw new \Exception('Could not create redis connection');
+}
+
 
 $message = '';
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
@@ -31,16 +45,34 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         $statement->execute(['id' => $_POST['item_id']]);
         $message = 'item has been deleted';
     }
+    $redis->del($redis_items_cache_key);
+    header('Location: ' . $_SERVER['PHP_SELF']);exit();
 }
 
-$statement = $connection->prepare('SELECT `id`, `name` FROM `sample_items`');
-$statement->execute([]);
-$items = [];
-while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
-    $items[] = ['item_name' => $row['name'], 'item_id' => $row['id']];
+$items = $redis->get($redis_items_cache_key);
+$cached_version = false;
+if (!empty($items)) {
+    $items = json_decode($items, true);
+}
+if (empty($items)) {
+    $statement = $connection->prepare('SELECT `id`, `name` FROM `sample_items`');
+    $statement->execute([]);
+    $items = [];
+    while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
+        $items[] = ['item_name' => $row['name'], 'item_id' => $row['id']];
+    }
+    if (count($items)) {
+        $redis->set($redis_items_cache_key, json_encode($items), 10);
+    }
+} else {
+    $cached_version = true;
 }
 
+echo 'Hello world this is docker public db and cache app!';
 echo 'Items so far:';
+if ($cached_version) {
+    echo '<div style="color:coral;">cached version</div>';
+}
 echo '<ul>';
 foreach ($items as $item) {
     echo '<li>' . htmlentities($item['item_name']);

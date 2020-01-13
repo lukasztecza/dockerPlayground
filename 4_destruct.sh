@@ -5,3 +5,4 @@ docker stack rm docker-public-sample-app
 docker stack rm docker-private-sample-app
 docker stack rm docker-private-mysql
 docker stack rm docker-public-db-and-cache-app
+docker stack rm docker-private-redis

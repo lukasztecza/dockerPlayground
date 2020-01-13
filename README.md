@@ -49,7 +49,7 @@ Public web server will listen on 443 port for https requests and mounts in `dock
 ```
 ./domains_certs:/etc/ssl/domains_certs
 ```
-This means you need key and crt files for web server
+This means you need key and crt files for web server (already in repo with some dummy values)
 ```
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout localhost.key -out localhost.crt
 ```
@@ -104,15 +104,10 @@ Mysql server that runs on docker private network (on dev you may want to use adm
 #### docker-public-db-and-cache-app
 App has db folder in which you can find sql that should be run in docker-private-mysql container so you may want to copy it into dumps directory of mysql container and run it
 
+####
+Redis server that runs on docker private network (you can connect to it and use redis via redis-cli) or investigate docker-public-db-and-cache-app that uses both mysql and redis
+
 TODO following containers
-####
-Redis
-
-####
-Memcached
-
-####
-Sample app that will grab values from db (use cache for a read - short to test) and store values to db (db part done)
 
 ####
 Rabbit
