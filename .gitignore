@@ -2,3 +2,6 @@ dockerPrivateMysql/databasedir/*
 !dockerPrivateMysql/databasedir/.gitkeep
 dockerPrivateMysql/dumps/*
 !dockerPrivateMysql/dumps/.gitkeep
+
+*.swp
+*.swo
