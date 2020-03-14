@@ -37,7 +37,7 @@ try {
 $message = '';
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     if ('/add' === $_SERVER['REQUEST_URI']) {
-        $statement = $connection->prepare('INSERT INTO `sample_items` (`name`) VALUES (:name)');    
+        $statement = $connection->prepare('INSERT INTO `sample_items` (`name`) VALUES (:name)');
         $statement->execute(['name' => $_POST['add_item']]);
         $message = 'item has been added';
     } elseif ('/delete' === $_SERVER['REQUEST_URI']) {
@@ -68,7 +68,7 @@ if (empty($items)) {
     $cached_version = true;
 }
 
-echo 'Hello world this is docker public db and cache app!';
+echo 'Hello world this is docker public db and cache app!<br />';
 echo 'Items so far:';
 if ($cached_version) {
     echo '<div style="color:coral;">cached version</div>';

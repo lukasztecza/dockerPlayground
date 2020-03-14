@@ -119,4 +119,4 @@ Sample consumer for rabbit that will call private app to store something
 Sample producer for rabbit that will raise something whenever when called
 
 ####
-Elk stack that will log everything apps and conusumers (beats, logstahs, elasticsearch, kibana - publiv but auth and ip whitelist)
+Elk stack that will log everything apps and conusumers (beats, logstahs, elasticsearch, kibana - public but auth and ip whitelist)

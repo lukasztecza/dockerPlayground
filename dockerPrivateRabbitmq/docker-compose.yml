@@ -1,0 +1,26 @@
+version: "3.5"
+
+networks:
+    private-network:
+        name: docker-private-apps-network
+        external: true
+
+services:
+    docker-private-rabbitmq:
+        image: docker-private-rabbitmq:latest
+        deploy:
+            replicas: 1
+            resources:
+                limits:
+                    cpus: "0.4"
+                    memory: 256M
+            restart_policy:
+                condition: on-failure
+        networks:
+            - private-network
+        ports:
+            - 15672:15672
+        environment:
+            - RABBITMQ_DEFAULT_USER=myuser
+            - RABBITMQ_DEFAULT_PASS=mypass
+            - RABBITMQ_ERLANG_COOKIE=somesecretpass

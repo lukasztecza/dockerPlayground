@@ -31,6 +31,6 @@ echo 'Uri for private sample app';
 echo '<br />';
 echo $decoded_body['private_app_uri'];
 echo '<br />';
-echo 'get for private sample app';
+echo 'get from private sample app';
 echo '<br />';
 var_dump($decoded_body['private_app_get']);
