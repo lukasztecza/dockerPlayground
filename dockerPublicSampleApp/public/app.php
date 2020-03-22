@@ -7,9 +7,9 @@ echo $_SERVER['HOSTNAME'];
 echo '<br />';
 echo 'Grabbing private app data';
 echo '<br />';
-$uri = 'docker-private-web-server/docker-private-sample-app?some_query_param=1';
-#This is how you would pass route and extra params to docker-private-sample-app
-#$uri = 'docker-private-web-server/docker-private-sample-app/someroute?some_query_param=1';
+
+$private_sample_app_host = getenv('PRIVATE_SAMPLE_APP_HOST');
+$uri = $private_sample_app_host . '/someroute?some_query_param=' . rand(1,100);
 $options = [
     CURLOPT_URL => $uri,
     CURLOPT_HEADER => true,
@@ -31,6 +31,6 @@ echo 'Uri for private sample app';
 echo '<br />';
 echo $decoded_body['private_app_uri'];
 echo '<br />';
-echo 'get for private sample app';
+echo 'get from private sample app';
 echo '<br />';
 var_dump($decoded_body['private_app_get']);

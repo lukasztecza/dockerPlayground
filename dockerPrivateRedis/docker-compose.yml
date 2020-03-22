@@ -20,8 +20,6 @@ services:
                 constraints: [node.role == manager]
         networks:
             - private-network
-        ports:
-            - "6379:6379"
 
 # note that following (listen on all interfaces not only binded, allow connections from all, set storage dir, set password) has been set extra in redis.conf file
 # # bind

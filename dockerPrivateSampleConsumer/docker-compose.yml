@@ -1,0 +1,33 @@
+version: "3.5"
+
+networks:
+    public-network:
+        name: docker-public-apps-network
+        external: true
+    private-network:
+        name: docker-private-apps-network
+        external: true
+
+services:
+    docker-private-sample-consumer:
+        image: docker-private-sample-consumer:latest
+        deploy:
+            replicas: 1
+            resources:
+                limits:
+                    cpus: "0.1"
+                    memory: 32M
+            restart_policy:
+                condition: on-failure
+        networks:
+            - public-network
+            - private-network
+        environment:
+            - RABBITMQ_APP_HOST=docker-private-rabbitmq
+            - RABBITMQ_APP_PORT=5672
+            - RABBITMQ_APP_USER=myuser
+            - RABBITMQ_APP_PASS=mypass
+            - RABBITMQ_APP_QUEUE=queue_for_storage
+            - RABBITMQ_APP_EXCHANGE=storage_exchange
+            - RABBITMQ_APP_ROUTING_KEY=storage_info
+            - PUBLIC_SAMPLE_PRODUCER_HOST=docker-private-web-server/docker-public-sample-producer

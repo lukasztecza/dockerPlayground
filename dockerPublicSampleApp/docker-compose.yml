@@ -22,6 +22,8 @@ services:
         networks:
             - public-network
             - private-network
+        environment:
+            - PRIVATE_SAMPLE_APP_HOST=docker-private-web-server/docker-private-sample-app
 
 #graphical ui for docker containers visualizer
     visualizer:
