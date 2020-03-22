@@ -9,7 +9,8 @@ docker stack rm docker-private-redis
 docker stack rm docker-public-db-and-cache-app
 
 docker stack rm docker-private-rabbitmq
-docker stack rm docker-public-rabbitmq-producer
+docker stack rm docker-public-sample-producer
+docker stack rm docker-private-sample-consumer
 
 CURRENT_DIR=$(dirname $0)
 docker stack deploy -c "$CURRENT_DIR/dockerPublicWebServer/docker-compose.yml" docker-public-web-server
@@ -22,4 +23,5 @@ docker stack deploy -c "$CURRENT_DIR/dockerPrivateRedis/docker-compose.yml" dock
 docker stack deploy -c "$CURRENT_DIR/dockerPublicDbAndCacheApp/docker-compose.yml" docker-public-db-and-cache-app
 
 docker stack deploy -c "$CURRENT_DIR/dockerPrivateRabbitmq/docker-compose.yml" docker-private-rabbitmq
-docker stack deploy -c "$CURRENT_DIR/dockerPublicRabbitmqProducer/docker-compose.yml" docker-public-rabbitmq-producer
+docker stack deploy -c "$CURRENT_DIR/dockerPublicSampleProducer/docker-compose.yml" docker-public-sample-producer
+docker stack deploy -c "$CURRENT_DIR/dockerPrivateSampleConsumer/docker-compose.yml" docker-private-sample-consumer

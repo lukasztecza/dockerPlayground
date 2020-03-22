@@ -9,8 +9,8 @@ networks:
         external: true
 
 services:
-    docker-public-rabbitmq-producer:
-        image: docker-public-rabbitmq-producer:latest
+    docker-private-sample-consumer:
+        image: docker-private-sample-consumer:latest
         deploy:
             replicas: 1
             resources:
@@ -23,6 +23,11 @@ services:
             - public-network
             - private-network
         environment:
-            - RABBITMQ_DEFAULT_USER=myuser
-            #- RABBITMQ_DEFAULT_PASS=mypass
-            #- RABBITMQ_ERLANG_COOKIE=somesecretpass
+            - RABBITMQ_APP_HOST=docker-private-rabbitmq
+            - RABBITMQ_APP_PORT=5672
+            - RABBITMQ_APP_USER=myuser
+            - RABBITMQ_APP_PASS=mypass
+            - RABBITMQ_APP_QUEUE=queue_for_storage
+            - RABBITMQ_APP_EXCHANGE=storage_exchange
+            - RABBITMQ_APP_ROUTING_KEY=storage_info
+            - PUBLIC_SAMPLE_PRODUCER_HOST=docker-private-web-server/docker-public-sample-producer

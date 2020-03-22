@@ -102,21 +102,20 @@ Beside public/private web servers and public/private sample apps there are sever
 Mysql server that runs on docker private network (on dev you may want to use adminer which is added to docker-compose) and has mounted databasedir and dumps directories
 
 #### docker-public-db-and-cache-app
-App has db folder in which you can find sql that should be run in docker-private-mysql container so you may want to copy it into dumps directory of mysql container and run it
+App has db folder in which you can find sql that should be run in docker-private-mysql container so you may want to copy it into dumps directory of mysql container and run it from within container (dumps is mounted on docker-private-mysql container)
 
 ####
-Redis server that runs on docker private network (you can connect to it and use redis via redis-cli) or investigate docker-public-db-and-cache-app that uses both mysql and redis
-
-TODO following containers
+Redis server that runs on docker private network (you can connect to it and use redis via redis-cli) and is used by docker-public-db-and-cache-app that uses also mysql (redis is for cache)
 
 ####
-Rabbit
+Rabbit server that runs on docker private network (you may want to use rabbit management user interface that can be accessed on browser through port 15672)
 
 ####
-Sample consumer for rabbit that will call private app to store something
+Sample producer for rabbit that has user interface accessible by the browser and raises events for rabbit
 
 ####
-Sample producer for rabbit that will raise something whenever when called
+Sample consumer for rabbit that consumes messages from rabbit queue and calls sample producer endpoint
 
 ####
+TODO
 Elk stack that will log everything apps and conusumers (beats, logstahs, elasticsearch, kibana - public but auth and ip whitelist)

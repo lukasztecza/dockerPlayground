@@ -9,4 +9,5 @@ docker stack rm docker-private-redis
 docker stack rm docker-public-db-and-cache-app
 
 docker stack rm docker-private-rabbitmq
-docker stack rm docker-public-rabbitmq-producer
+docker stack rm docker-public-sample-producer
+docker stack rm docker-private-sample-consumer
