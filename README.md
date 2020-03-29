@@ -114,7 +114,7 @@ Rabbit server that runs on docker private network (you may want to use rabbit ma
 Sample producer for rabbit that has user interface accessible by the browser and raises events for rabbit
 
 ####
-Sample consumer for rabbit that consumes messages from rabbit queue and calls sample producer endpoint
+Sample consumer for rabbit that consumes messages from rabbit queue and calls sample producer endpoint (consumer has fail and unprocessable flows)
 
 ####
 TODO
