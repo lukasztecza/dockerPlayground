@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Message\AMQPMessage;
+//use PhpAmqpLib\Wire\AMQPTable;
 
 $rabbit_host = getenv('RABBITMQ_APP_HOST');
 $rabbit_port = getenv('RABBITMQ_APP_PORT');
@@ -13,10 +14,10 @@ $rabbit_routing_key = getenv('RABBITMQ_APP_ROUTING_KEY');
 try {
     $connection = new AMQPStreamConnection($rabbit_host, $rabbit_port, $rabbit_user, $rabbit_password);
     $channel = $connection->channel();
+    //producer should be responsble for declaration of exchange only but we could declare queue and bind it too
     $channel->exchange_declare($rabbit_exchange, 'topic', false, false, false);
-    //this could be done by consumer only but it is idempotent so can be done by producer too
-    $channel->queue_declare($rabbit_queue, false, false, false, false);
-    $channel->queue_bind($rabbit_queue, $rabbit_exchange, $rabbit_routing_key);
+    //$channel->queue_declare($rabbit_queue, false, false, false, false, false, ['x-dead-letter-exchange' => $rabbit_exchange . '_fail']);
+    //$channel->queue_bind($rabbit_queue, $rabbit_exchange, $rabbit_routing_key);
 } catch (\Throwable $e) {
     error_log($e->getMessage());
     throw new \Exception('Could not create rabbitmq connection');
