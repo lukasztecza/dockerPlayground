@@ -119,3 +119,7 @@ Sample consumer for rabbit that consumes messages from rabbit queue and calls sa
 ####
 TODO
 Elk stack that will log everything apps and conusumers (beats, logstahs, elasticsearch, kibana - public but auth and ip whitelist)
+
+####
+TODO
+mailing container connection api
