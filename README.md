@@ -123,3 +123,7 @@ Elk stack that will log everything apps and conusumers (beats, logstahs, elastic
 ####
 TODO
 mailing container connection api
+
+####
+TODO
+update nginx
